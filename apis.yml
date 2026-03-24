@@ -1,0 +1,7 @@
+aid: bank-of-new-york-mellon
+url: https://raw.githubusercontent.com/api-evangelist/bank-of-new-york-mellon/refs/heads/main/apis.yml
+modified: '2026-03-23'
+apis: []
+common:
+  - type: Website
+    url: https://www.bank-of-new-york-mellon.com
