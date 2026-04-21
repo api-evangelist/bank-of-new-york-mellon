@@ -1,0 +1,9 @@
+{
+  "accountId": "example-accountId",
+  "accountNumber": "example-accountNumber",
+  "accountName": "example-accountName",
+  "accountType": "example-accountType",
+  "currency": "example-currency",
+  "status": "example-status",
+  "bankCode": "example-bankCode"
+}

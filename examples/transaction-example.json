@@ -1,0 +1,12 @@
+{
+  "transactionId": "example-transactionId",
+  "accountId": "example-accountId",
+  "amount": 0,
+  "currency": "example-currency",
+  "debitCredit": "example-debitCredit",
+  "description": "example-description",
+  "referenceNumber": "example-referenceNumber",
+  "valueDate": "2026-04-19",
+  "bookingDate": "2026-04-19",
+  "status": "example-status"
+}

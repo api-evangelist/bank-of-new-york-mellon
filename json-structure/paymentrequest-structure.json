@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/bank-of-new-york-mellon/json-structure/paymentrequest-structure.json",
+  "title": "PaymentRequest",
+  "type": "record",
+  "members": [
+    {
+      "name": "paymentType",
+      "type": "string",
+      "description": "Payment type (WIRE, ACH_CREDIT, ACH_DEBIT, SWIFT, CHIPS)"
+    },
+    {
+      "name": "amount",
+      "type": "number",
+      "description": ""
+    },
+    {
+      "name": "currency",
+      "type": "string",
+      "description": ""
+    },
+    {
+      "name": "debitAccountId",
+      "type": "string",
+      "description": ""
+    },
+    {
+      "name": "valueDate",
+      "type": "string",
+      "description": ""
+    },
+    {
+      "name": "creditorName",
+      "type": "string",
+      "description": ""
+    },
+    {
+      "name": "creditorAccountNumber",
+      "type": "string",
+      "description": ""
+    },
+    {
+      "name": "creditorBankCode",
+      "type": "string",
+      "description": ""
+    },
+    {
+      "name": "creditorSwiftCode",
+      "type": "string",
+      "description": ""
+    },
+    {
+      "name": "remittanceInfo",
+      "type": "string",
+      "description": ""
+    },
+    {
+      "name": "clientReference",
+      "type": "string",
+      "description": ""
+    }
+  ]
+}

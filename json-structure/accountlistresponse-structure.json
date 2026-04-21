@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/bank-of-new-york-mellon/json-structure/accountlistresponse-structure.json",
+  "title": "AccountListResponse",
+  "type": "record",
+  "members": [
+    {
+      "name": "accounts",
+      "type": "array",
+      "description": ""
+    },
+    {
+      "name": "totalCount",
+      "type": "integer",
+      "description": ""
+    }
+  ]
+}

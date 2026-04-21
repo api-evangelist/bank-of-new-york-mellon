@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/bank-of-new-york-mellon/json-schema/transaction-schema.json",
+  "title": "Transaction",
+  "type": "object",
+  "description": "A transaction on a BNY Mellon account",
+  "properties": {
+    "transactionId": {
+      "type": "string"
+    },
+    "accountId": {
+      "type": "string"
+    },
+    "amount": {
+      "type": "number",
+      "format": "double"
+    },
+    "currency": {
+      "type": "string"
+    },
+    "debitCredit": {
+      "type": "string",
+      "enum": [
+        "debit",
+        "credit"
+      ]
+    },
+    "description": {
+      "type": "string"
+    },
+    "referenceNumber": {
+      "type": "string"
+    },
+    "valueDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "bookingDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "status": {
+      "type": "string"
+    }
+  }
+}

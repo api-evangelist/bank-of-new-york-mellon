@@ -1,0 +1,124 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "BNY Mellon"
+  description: "Taxonomy for the BNY Mellon Treasury Services API covering institutional banking, payments, and cash management."
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+operational:
+  apis:
+    - namespace: bny-treasury
+      label: BNY Mellon Treasury Services API
+      version: "4.0"
+      baseUrl: https://api.bnymellon.com/treasury/v4
+      status: active
+
+  resources:
+    - name: accounts
+      description: BNY Mellon institutional accounts
+      apis: [bny-treasury]
+      actions: [list, get, get-balances, list-transactions]
+    - name: payments
+      description: Payment transactions via wire, ACH, SWIFT, and CHIPS
+      apis: [bny-treasury]
+      actions: [initiate, list, get]
+    - name: funds-transfers
+      description: Internal account-to-account funds transfers
+      apis: [bny-treasury]
+      actions: [initiate, get]
+
+  actions:
+    - name: list
+      description: Retrieve a collection
+      methods: [GET]
+      pattern: read
+    - name: get
+      description: Retrieve a specific resource
+      methods: [GET]
+      pattern: read
+    - name: get-balances
+      description: Retrieve account balance data
+      methods: [GET]
+      pattern: read
+    - name: list-transactions
+      description: List transaction history
+      methods: [GET]
+      pattern: read
+    - name: initiate
+      description: Initiate a new transaction
+      methods: [POST]
+      pattern: write
+
+  authentication:
+    schemes:
+      - name: OAuth2
+        type: oauth2
+        description: OAuth2 Client Credentials
+
+capability:
+  workflows:
+    - name: Treasury Operations
+      file: capabilities/treasury-operations.yaml
+      description: Institutional treasury operations including accounts, payments, and funds transfers
+      apis_combined: [bny-treasury]
+      tool_count: 6
+      personas: [Corporate Treasurer, Treasury Analyst, Institutional Client]
+      domains: [Treasury Management, Payments, Cash Management]
+
+  personas:
+    - id: corporate-treasurer
+      name: Corporate Treasurer
+      description: Executive managing corporate liquidity and treasury operations
+      workflows: [Treasury Operations]
+    - id: treasury-analyst
+      name: Treasury Analyst
+      description: Analyst executing treasury transactions and reporting
+      workflows: [Treasury Operations]
+    - id: institutional-client
+      name: Institutional Client
+      description: Institutional investor or fund manager using BNY custody and treasury services
+      workflows: [Treasury Operations]
+
+  domains:
+    - name: Treasury Management
+      description: Institutional account management and cash positioning
+      resources: [accounts]
+      workflows: [Treasury Operations]
+    - name: Payments
+      description: Wire, ACH, SWIFT, and CHIPS payment execution
+      resources: [payments]
+      workflows: [Treasury Operations]
+    - name: Cash Management
+      description: Internal funds transfers and liquidity management
+      resources: [funds-transfers]
+      workflows: [Treasury Operations]
+
+  namespaces:
+    - namespace: bny-treasury
+      type: consumed
+    - namespace: bny-treasury-mcp
+      type: mcp-exposed
+      port: 9080
+
+  binds:
+    - name: BNY_CLIENT_ID
+      description: BNY Mellon OAuth2 Client ID
+      workflows: [Treasury Operations]
+    - name: BNY_CLIENT_SECRET
+      description: BNY Mellon OAuth2 Client Secret
+      workflows: [Treasury Operations]
+
+crossReference:
+  - resource: accounts
+    operations: [listAccounts, getAccount, getAccountBalances, listTransactions]
+    workflows: [Treasury Operations]
+    personas: [Corporate Treasurer, Treasury Analyst, Institutional Client]
+  - resource: payments
+    operations: [initiatePayment, listPayments, getPayment]
+    workflows: [Treasury Operations]
+    personas: [Corporate Treasurer, Treasury Analyst]
+  - resource: funds-transfers
+    operations: [initiateFundsTransfer, getFundsTransfer]
+    workflows: [Treasury Operations]
+    personas: [Corporate Treasurer, Treasury Analyst]

@@ -1,0 +1,9 @@
+{
+  "amount": 0,
+  "currency": "example-currency",
+  "debitAccountId": "example-debitAccountId",
+  "creditAccountId": "example-creditAccountId",
+  "valueDate": "2026-04-19",
+  "memo": "example-memo",
+  "clientReference": "example-clientReference"
+}

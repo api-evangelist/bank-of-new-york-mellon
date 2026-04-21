@@ -1,0 +1,13 @@
+{
+  "paymentType": "example-paymentType",
+  "amount": 0,
+  "currency": "example-currency",
+  "debitAccountId": "example-debitAccountId",
+  "valueDate": "2026-04-19",
+  "creditorName": "example-creditorName",
+  "creditorAccountNumber": "example-creditorAccountNumber",
+  "creditorBankCode": "example-creditorBankCode",
+  "creditorSwiftCode": "example-creditorSwiftCode",
+  "remittanceInfo": "example-remittanceInfo",
+  "clientReference": "example-clientReference"
+}

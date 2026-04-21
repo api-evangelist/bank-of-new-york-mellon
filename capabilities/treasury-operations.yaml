@@ -1,0 +1,95 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "BNY Mellon Treasury Operations"
+  description: >-
+    BNY Mellon treasury operations workflow for institutional clients covering account
+    management, balance reporting, payment initiation, funds transfers, and transaction
+    history. Integrates with TMS and ERP platforms for automated treasury operations.
+  tags:
+    - BNY Mellon
+    - Treasury
+    - Payments
+    - Institutional Banking
+    - Wire Transfers
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      BNY_CLIENT_ID: BNY_CLIENT_ID
+      BNY_CLIENT_SECRET: BNY_CLIENT_SECRET
+
+capability:
+  consumes:
+    - import: bny-treasury
+      location: ./shared/treasury-services-api.yaml
+
+  exposes:
+    - type: mcp
+      port: 9080
+      namespace: bny-treasury-mcp
+      transport: http
+      description: "MCP server for AI-assisted BNY Mellon treasury operations."
+      tools:
+        - name: list-bny-accounts
+          description: List BNY Mellon treasury accounts for the authenticated client
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "bny-treasury.listAccounts"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-account-balances
+          description: Get current and available balances for a BNY Mellon account
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "bny-treasury.getAccountBalances"
+          with:
+            accountId: "tools.accountId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-transactions
+          description: List transactions for a BNY Mellon account
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "bny-treasury.listTransactions"
+          with:
+            accountId: "tools.accountId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: initiate-payment
+          description: Initiate a payment (wire, ACH, SWIFT, CHIPS) through BNY Mellon
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "bny-treasury.initiatePayment"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-payment-status
+          description: Get the status and details of a BNY Mellon payment
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "bny-treasury.getPayment"
+          with:
+            paymentId: "tools.paymentId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: initiate-funds-transfer
+          description: Initiate a funds transfer between BNY Mellon accounts
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "bny-treasury.initiateFundsTransfer"
+          outputParameters:
+            - type: object
+              mapping: "$."

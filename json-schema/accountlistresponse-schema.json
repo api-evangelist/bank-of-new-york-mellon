@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/bank-of-new-york-mellon/json-schema/accountlistresponse-schema.json",
+  "title": "AccountListResponse",
+  "type": "object",
+  "description": "List of accounts",
+  "properties": {
+    "accounts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Account"
+      }
+    },
+    "totalCount": {
+      "type": "integer"
+    }
+  }
+}

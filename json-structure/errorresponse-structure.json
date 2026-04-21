@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/bank-of-new-york-mellon/json-structure/errorresponse-structure.json",
+  "title": "ErrorResponse",
+  "type": "record",
+  "members": [
+    {
+      "name": "errorCode",
+      "type": "string",
+      "description": ""
+    },
+    {
+      "name": "message",
+      "type": "string",
+      "description": ""
+    },
+    {
+      "name": "requestId",
+      "type": "string",
+      "description": ""
+    },
+    {
+      "name": "details",
+      "type": "array",
+      "description": ""
+    }
+  ]
+}

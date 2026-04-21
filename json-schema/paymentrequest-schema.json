@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/bank-of-new-york-mellon/json-schema/paymentrequest-schema.json",
+  "title": "PaymentRequest",
+  "type": "object",
+  "description": "Payment initiation request",
+  "required": [
+    "paymentType",
+    "amount",
+    "currency",
+    "debitAccountId",
+    "creditorName",
+    "creditorAccountNumber"
+  ],
+  "properties": {
+    "paymentType": {
+      "type": "string",
+      "description": "Payment type (WIRE, ACH_CREDIT, ACH_DEBIT, SWIFT, CHIPS)"
+    },
+    "amount": {
+      "type": "number",
+      "format": "double"
+    },
+    "currency": {
+      "type": "string"
+    },
+    "debitAccountId": {
+      "type": "string"
+    },
+    "valueDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "creditorName": {
+      "type": "string"
+    },
+    "creditorAccountNumber": {
+      "type": "string"
+    },
+    "creditorBankCode": {
+      "type": "string"
+    },
+    "creditorSwiftCode": {
+      "type": "string"
+    },
+    "remittanceInfo": {
+      "type": "string"
+    },
+    "clientReference": {
+      "type": "string"
+    }
+  }
+}

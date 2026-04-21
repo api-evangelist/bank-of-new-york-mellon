@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/bank-of-new-york-mellon/json-schema/fundstransferresponse-schema.json",
+  "title": "FundsTransferResponse",
+  "type": "object",
+  "description": "Funds transfer response",
+  "properties": {
+    "transferId": {
+      "type": "string"
+    },
+    "clientReference": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "processing",
+        "completed",
+        "rejected"
+      ]
+    },
+    "amount": {
+      "type": "number",
+      "format": "double"
+    },
+    "currency": {
+      "type": "string"
+    },
+    "debitAccountId": {
+      "type": "string"
+    },
+    "creditAccountId": {
+      "type": "string"
+    },
+    "valueDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

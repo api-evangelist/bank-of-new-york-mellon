@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/bank-of-new-york-mellon/json-structure/balance-structure.json",
+  "title": "Balance",
+  "type": "record",
+  "members": [
+    {
+      "name": "accountId",
+      "type": "string",
+      "description": ""
+    },
+    {
+      "name": "balanceType",
+      "type": "string",
+      "description": "Balance type (current, available, intraday)"
+    },
+    {
+      "name": "amount",
+      "type": "number",
+      "description": ""
+    },
+    {
+      "name": "currency",
+      "type": "string",
+      "description": ""
+    },
+    {
+      "name": "asOfDateTime",
+      "type": "string",
+      "description": ""
+    },
+    {
+      "name": "openingBalance",
+      "type": "number",
+      "description": ""
+    },
+    {
+      "name": "closingBalance",
+      "type": "number",
+      "description": ""
+    }
+  ]
+}

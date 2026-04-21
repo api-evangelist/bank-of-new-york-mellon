@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/bank-of-new-york-mellon/json-schema/paymentresponse-schema.json",
+  "title": "PaymentResponse",
+  "type": "object",
+  "description": "Payment response",
+  "properties": {
+    "paymentId": {
+      "type": "string"
+    },
+    "clientReference": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "processing",
+        "completed",
+        "rejected",
+        "returned"
+      ]
+    },
+    "paymentType": {
+      "type": "string"
+    },
+    "amount": {
+      "type": "number",
+      "format": "double"
+    },
+    "currency": {
+      "type": "string"
+    },
+    "valueDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "statusMessage": {
+      "type": "string"
+    }
+  }
+}

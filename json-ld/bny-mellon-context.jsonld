@@ -1,0 +1,212 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "bnyapi": "https://api-evangelist.github.io/bank-of-new-york-mellon/vocab#",
+    "Account": {
+      "@id": "bnyapi:Account"
+    },
+    "accountId": {
+      "@id": "bnyapi:accountId",
+      "@type": "xsd:string"
+    },
+    "accountNumber": {
+      "@id": "bnyapi:accountNumber",
+      "@type": "xsd:string"
+    },
+    "accountName": {
+      "@id": "bnyapi:accountName",
+      "@type": "xsd:string"
+    },
+    "accountType": {
+      "@id": "bnyapi:accountType",
+      "@type": "xsd:string"
+    },
+    "currency": {
+      "@id": "bnyapi:currency",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "bnyapi:status",
+      "@type": "xsd:string"
+    },
+    "bankCode": {
+      "@id": "bnyapi:bankCode",
+      "@type": "xsd:string"
+    },
+    "AccountListResponse": {
+      "@id": "bnyapi:AccountListResponse"
+    },
+    "accounts": {
+      "@id": "bnyapi:accounts",
+      "@type": "xsd:string"
+    },
+    "totalCount": {
+      "@id": "bnyapi:totalCount",
+      "@type": "xsd:integer"
+    },
+    "Balance": {
+      "@id": "bnyapi:Balance"
+    },
+    "balanceType": {
+      "@id": "bnyapi:balanceType",
+      "@type": "xsd:string"
+    },
+    "amount": {
+      "@id": "bnyapi:amount",
+      "@type": "xsd:decimal"
+    },
+    "asOfDateTime": {
+      "@id": "bnyapi:asOfDateTime",
+      "@type": "xsd:string"
+    },
+    "openingBalance": {
+      "@id": "bnyapi:openingBalance",
+      "@type": "xsd:decimal"
+    },
+    "closingBalance": {
+      "@id": "bnyapi:closingBalance",
+      "@type": "xsd:decimal"
+    },
+    "BalanceResponse": {
+      "@id": "bnyapi:BalanceResponse"
+    },
+    "balances": {
+      "@id": "bnyapi:balances",
+      "@type": "xsd:string"
+    },
+    "Transaction": {
+      "@id": "bnyapi:Transaction"
+    },
+    "transactionId": {
+      "@id": "bnyapi:transactionId",
+      "@type": "xsd:string"
+    },
+    "debitCredit": {
+      "@id": "bnyapi:debitCredit",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "bnyapi:description",
+      "@type": "xsd:string"
+    },
+    "referenceNumber": {
+      "@id": "bnyapi:referenceNumber",
+      "@type": "xsd:string"
+    },
+    "valueDate": {
+      "@id": "bnyapi:valueDate",
+      "@type": "xsd:string"
+    },
+    "bookingDate": {
+      "@id": "bnyapi:bookingDate",
+      "@type": "xsd:string"
+    },
+    "TransactionListResponse": {
+      "@id": "bnyapi:TransactionListResponse"
+    },
+    "transactions": {
+      "@id": "bnyapi:transactions",
+      "@type": "xsd:string"
+    },
+    "pageSize": {
+      "@id": "bnyapi:pageSize",
+      "@type": "xsd:integer"
+    },
+    "PaymentRequest": {
+      "@id": "bnyapi:PaymentRequest"
+    },
+    "paymentType": {
+      "@id": "bnyapi:paymentType",
+      "@type": "xsd:string"
+    },
+    "debitAccountId": {
+      "@id": "bnyapi:debitAccountId",
+      "@type": "xsd:string"
+    },
+    "creditorName": {
+      "@id": "bnyapi:creditorName",
+      "@type": "xsd:string"
+    },
+    "creditorAccountNumber": {
+      "@id": "bnyapi:creditorAccountNumber",
+      "@type": "xsd:string"
+    },
+    "creditorBankCode": {
+      "@id": "bnyapi:creditorBankCode",
+      "@type": "xsd:string"
+    },
+    "creditorSwiftCode": {
+      "@id": "bnyapi:creditorSwiftCode",
+      "@type": "xsd:string"
+    },
+    "remittanceInfo": {
+      "@id": "bnyapi:remittanceInfo",
+      "@type": "xsd:string"
+    },
+    "clientReference": {
+      "@id": "bnyapi:clientReference",
+      "@type": "xsd:string"
+    },
+    "PaymentResponse": {
+      "@id": "bnyapi:PaymentResponse"
+    },
+    "paymentId": {
+      "@id": "bnyapi:paymentId",
+      "@type": "xsd:string"
+    },
+    "createdAt": {
+      "@id": "bnyapi:createdAt",
+      "@type": "xsd:string"
+    },
+    "statusMessage": {
+      "@id": "bnyapi:statusMessage",
+      "@type": "xsd:string"
+    },
+    "PaymentListResponse": {
+      "@id": "bnyapi:PaymentListResponse"
+    },
+    "payments": {
+      "@id": "bnyapi:payments",
+      "@type": "xsd:string"
+    },
+    "FundsTransferRequest": {
+      "@id": "bnyapi:FundsTransferRequest"
+    },
+    "creditAccountId": {
+      "@id": "bnyapi:creditAccountId",
+      "@type": "xsd:string"
+    },
+    "memo": {
+      "@id": "bnyapi:memo",
+      "@type": "xsd:string"
+    },
+    "FundsTransferResponse": {
+      "@id": "bnyapi:FundsTransferResponse"
+    },
+    "transferId": {
+      "@id": "bnyapi:transferId",
+      "@type": "xsd:string"
+    },
+    "ErrorResponse": {
+      "@id": "bnyapi:ErrorResponse"
+    },
+    "errorCode": {
+      "@id": "bnyapi:errorCode",
+      "@type": "xsd:string"
+    },
+    "message": {
+      "@id": "bnyapi:message",
+      "@type": "xsd:string"
+    },
+    "requestId": {
+      "@id": "bnyapi:requestId",
+      "@type": "xsd:string"
+    },
+    "details": {
+      "@id": "bnyapi:details",
+      "@type": "xsd:string"
+    }
+  }
+}

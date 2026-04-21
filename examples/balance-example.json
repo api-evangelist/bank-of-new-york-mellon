@@ -1,0 +1,9 @@
+{
+  "accountId": "example-accountId",
+  "balanceType": "example-balanceType",
+  "amount": 0,
+  "currency": "example-currency",
+  "asOfDateTime": "2026-04-19T12:00:00Z",
+  "openingBalance": 0,
+  "closingBalance": 0
+}

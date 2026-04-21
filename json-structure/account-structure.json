@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/bank-of-new-york-mellon/json-structure/account-structure.json",
+  "title": "Account",
+  "type": "record",
+  "members": [
+    {
+      "name": "accountId",
+      "type": "string",
+      "description": "Unique account identifier"
+    },
+    {
+      "name": "accountNumber",
+      "type": "string",
+      "description": "Account number (masked)"
+    },
+    {
+      "name": "accountName",
+      "type": "string",
+      "description": "Account name"
+    },
+    {
+      "name": "accountType",
+      "type": "string",
+      "description": "Account type"
+    },
+    {
+      "name": "currency",
+      "type": "string",
+      "description": "Account currency (ISO 4217)"
+    },
+    {
+      "name": "status",
+      "type": "string",
+      "description": "Account status"
+    },
+    {
+      "name": "bankCode",
+      "type": "string",
+      "description": "BNY Mellon bank code"
+    }
+  ]
+}

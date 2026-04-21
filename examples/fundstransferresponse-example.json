@@ -1,0 +1,11 @@
+{
+  "transferId": "example-transferId",
+  "clientReference": "example-clientReference",
+  "status": "example-status",
+  "amount": 0,
+  "currency": "example-currency",
+  "debitAccountId": "example-debitAccountId",
+  "creditAccountId": "example-creditAccountId",
+  "valueDate": "2026-04-19",
+  "createdAt": "2026-04-19T12:00:00Z"
+}

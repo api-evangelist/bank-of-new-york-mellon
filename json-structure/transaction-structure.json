@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://api-evangelist.github.io/bank-of-new-york-mellon/json-structure/transaction-structure.json",
+  "title": "Transaction",
+  "type": "record",
+  "members": [
+    {
+      "name": "transactionId",
+      "type": "string",
+      "description": ""
+    },
+    {
+      "name": "accountId",
+      "type": "string",
+      "description": ""
+    },
+    {
+      "name": "amount",
+      "type": "number",
+      "description": ""
+    },
+    {
+      "name": "currency",
+      "type": "string",
+      "description": ""
+    },
+    {
+      "name": "debitCredit",
+      "type": "string",
+      "description": ""
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "description": ""
+    },
+    {
+      "name": "referenceNumber",
+      "type": "string",
+      "description": ""
+    },
+    {
+      "name": "valueDate",
+      "type": "string",
+      "description": ""
+    },
+    {
+      "name": "bookingDate",
+      "type": "string",
+      "description": ""
+    },
+    {
+      "name": "status",
+      "type": "string",
+      "description": ""
+    }
+  ]
+}

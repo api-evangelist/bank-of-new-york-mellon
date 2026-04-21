@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/bank-of-new-york-mellon/json-schema/fundstransferrequest-schema.json",
+  "title": "FundsTransferRequest",
+  "type": "object",
+  "description": "Funds transfer request between accounts",
+  "required": [
+    "amount",
+    "currency",
+    "debitAccountId",
+    "creditAccountId"
+  ],
+  "properties": {
+    "amount": {
+      "type": "number",
+      "format": "double"
+    },
+    "currency": {
+      "type": "string"
+    },
+    "debitAccountId": {
+      "type": "string"
+    },
+    "creditAccountId": {
+      "type": "string"
+    },
+    "valueDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "memo": {
+      "type": "string"
+    },
+    "clientReference": {
+      "type": "string"
+    }
+  }
+}

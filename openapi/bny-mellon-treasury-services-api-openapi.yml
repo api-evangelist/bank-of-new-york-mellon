@@ -1,0 +1,589 @@
+openapi: 3.0.3
+info:
+  title: BNY Mellon Treasury Services API
+  description: >-
+    The BNY Mellon Treasury Services API enables corporate clients to programmatically
+    initiate and track payments, access account balances and transaction history, manage
+    wire transfers, and retrieve reporting data. The API is available via the BNY Mellon
+    Marketplace (marketplace.bnymellon.com) and supports global treasury operations
+    across multiple currencies and payment rails.
+  version: 4.0.0
+  contact:
+    url: https://marketplace.bnymellon.com/treasury/api-central/
+servers:
+  - url: https://api.bnymellon.com/treasury/v4
+    description: BNY Mellon Treasury Services API Production
+  - url: https://apiuat.bnymellon.com/treasury/v4
+    description: BNY Mellon Treasury Services API UAT/Sandbox
+security:
+  - OAuth2: []
+paths:
+  /accounts:
+    get:
+      operationId: listAccounts
+      summary: List Accounts
+      description: Retrieve a list of accounts accessible to the authenticated client.
+      tags:
+        - Accounts
+      parameters:
+        - name: currency
+          in: query
+          description: Filter accounts by currency (ISO 4217)
+          schema:
+            type: string
+        - name: accountType
+          in: query
+          description: Filter by account type
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Account list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountListResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /accounts/{accountId}:
+    get:
+      operationId: getAccount
+      summary: Get Account
+      description: Retrieve details for a specific account.
+      tags:
+        - Accounts
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: Account identifier
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Account details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Account not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /accounts/{accountId}/balances:
+    get:
+      operationId: getAccountBalances
+      summary: Get Account Balances
+      description: Retrieve current, available, and intraday balances for an account.
+      tags:
+        - Balances
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: Account identifier
+          schema:
+            type: string
+        - name: balanceType
+          in: query
+          description: Balance type filter (current, available, intraday)
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Balance information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BalanceResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /accounts/{accountId}/transactions:
+    get:
+      operationId: listTransactions
+      summary: List Transactions
+      description: Retrieve transaction history for a specific account.
+      tags:
+        - Transactions
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: Account identifier
+          schema:
+            type: string
+        - name: fromDate
+          in: query
+          description: Start date (ISO 8601)
+          schema:
+            type: string
+            format: date
+        - name: toDate
+          in: query
+          description: End date (ISO 8601)
+          schema:
+            type: string
+            format: date
+        - name: limit
+          in: query
+          description: Page size
+          schema:
+            type: integer
+            default: 100
+      responses:
+        '200':
+          description: Transaction list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionListResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /payments:
+    post:
+      operationId: initiatePayment
+      summary: Initiate Payment
+      description: Initiate a payment including wire transfers, ACH, SWIFT, and international payments.
+      tags:
+        - Payments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentRequest'
+      responses:
+        '201':
+          description: Payment initiated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    get:
+      operationId: listPayments
+      summary: List Payments
+      description: Retrieve a list of payments with optional status and date filters.
+      tags:
+        - Payments
+      parameters:
+        - name: status
+          in: query
+          description: Payment status filter
+          schema:
+            type: string
+            enum: [pending, processing, completed, rejected, returned]
+        - name: fromDate
+          in: query
+          description: Start date filter
+          schema:
+            type: string
+            format: date
+        - name: toDate
+          in: query
+          description: End date filter
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Payment list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentListResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /payments/{paymentId}:
+    get:
+      operationId: getPayment
+      summary: Get Payment
+      description: Retrieve the status and details of a specific payment.
+      tags:
+        - Payments
+      parameters:
+        - name: paymentId
+          in: path
+          required: true
+          description: Payment identifier
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Payment details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Payment not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /funds-transfers:
+    post:
+      operationId: initiateFundsTransfer
+      summary: Initiate Funds Transfer
+      description: Initiate a domestic or international funds transfer between accounts.
+      tags:
+        - Funds Transfers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FundsTransferRequest'
+      responses:
+        '201':
+          description: Funds transfer initiated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FundsTransferResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /funds-transfers/{transferId}:
+    get:
+      operationId: getFundsTransfer
+      summary: Get Funds Transfer
+      description: Retrieve status and details of a specific funds transfer.
+      tags:
+        - Funds Transfers
+      parameters:
+        - name: transferId
+          in: path
+          required: true
+          description: Funds transfer identifier
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Funds transfer details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FundsTransferResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Transfer not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.bnymellon.com/oauth/token
+          scopes:
+            accounts:read: Read account data
+            balances:read: Read balance data
+            transactions:read: Read transaction history
+            payments:write: Initiate and manage payments
+            transfers:write: Initiate funds transfers
+  schemas:
+    Account:
+      type: object
+      description: A BNY Mellon treasury account
+      properties:
+        accountId:
+          type: string
+          description: Unique account identifier
+        accountNumber:
+          type: string
+          description: Account number (masked)
+        accountName:
+          type: string
+          description: Account name
+        accountType:
+          type: string
+          description: Account type
+        currency:
+          type: string
+          description: Account currency (ISO 4217)
+        status:
+          type: string
+          description: Account status
+          enum: [active, inactive, closed]
+        bankCode:
+          type: string
+          description: BNY Mellon bank code
+    AccountListResponse:
+      type: object
+      description: List of accounts
+      properties:
+        accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
+        totalCount:
+          type: integer
+    Balance:
+      type: object
+      description: Account balance record
+      properties:
+        accountId:
+          type: string
+        balanceType:
+          type: string
+          description: Balance type (current, available, intraday)
+        amount:
+          type: number
+          format: double
+        currency:
+          type: string
+        asOfDateTime:
+          type: string
+          format: date-time
+        openingBalance:
+          type: number
+          format: double
+        closingBalance:
+          type: number
+          format: double
+    BalanceResponse:
+      type: object
+      description: Account balances response
+      properties:
+        accountId:
+          type: string
+        balances:
+          type: array
+          items:
+            $ref: '#/components/schemas/Balance'
+    Transaction:
+      type: object
+      description: A transaction on a BNY Mellon account
+      properties:
+        transactionId:
+          type: string
+        accountId:
+          type: string
+        amount:
+          type: number
+          format: double
+        currency:
+          type: string
+        debitCredit:
+          type: string
+          enum: [debit, credit]
+        description:
+          type: string
+        referenceNumber:
+          type: string
+        valueDate:
+          type: string
+          format: date
+        bookingDate:
+          type: string
+          format: date
+        status:
+          type: string
+    TransactionListResponse:
+      type: object
+      description: Paginated transaction list
+      properties:
+        transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transaction'
+        totalCount:
+          type: integer
+        pageSize:
+          type: integer
+    PaymentRequest:
+      type: object
+      description: Payment initiation request
+      required:
+        - paymentType
+        - amount
+        - currency
+        - debitAccountId
+        - creditorName
+        - creditorAccountNumber
+      properties:
+        paymentType:
+          type: string
+          description: Payment type (WIRE, ACH_CREDIT, ACH_DEBIT, SWIFT, CHIPS)
+        amount:
+          type: number
+          format: double
+        currency:
+          type: string
+        debitAccountId:
+          type: string
+        valueDate:
+          type: string
+          format: date
+        creditorName:
+          type: string
+        creditorAccountNumber:
+          type: string
+        creditorBankCode:
+          type: string
+        creditorSwiftCode:
+          type: string
+        remittanceInfo:
+          type: string
+        clientReference:
+          type: string
+    PaymentResponse:
+      type: object
+      description: Payment response
+      properties:
+        paymentId:
+          type: string
+        clientReference:
+          type: string
+        status:
+          type: string
+          enum: [pending, processing, completed, rejected, returned]
+        paymentType:
+          type: string
+        amount:
+          type: number
+          format: double
+        currency:
+          type: string
+        valueDate:
+          type: string
+          format: date
+        createdAt:
+          type: string
+          format: date-time
+        statusMessage:
+          type: string
+    PaymentListResponse:
+      type: object
+      description: List of payments
+      properties:
+        payments:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentResponse'
+        totalCount:
+          type: integer
+    FundsTransferRequest:
+      type: object
+      description: Funds transfer request between accounts
+      required:
+        - amount
+        - currency
+        - debitAccountId
+        - creditAccountId
+      properties:
+        amount:
+          type: number
+          format: double
+        currency:
+          type: string
+        debitAccountId:
+          type: string
+        creditAccountId:
+          type: string
+        valueDate:
+          type: string
+          format: date
+        memo:
+          type: string
+        clientReference:
+          type: string
+    FundsTransferResponse:
+      type: object
+      description: Funds transfer response
+      properties:
+        transferId:
+          type: string
+        clientReference:
+          type: string
+        status:
+          type: string
+          enum: [pending, processing, completed, rejected]
+        amount:
+          type: number
+          format: double
+        currency:
+          type: string
+        debitAccountId:
+          type: string
+        creditAccountId:
+          type: string
+        valueDate:
+          type: string
+          format: date
+        createdAt:
+          type: string
+          format: date-time
+    ErrorResponse:
+      type: object
+      description: API error response
+      properties:
+        errorCode:
+          type: string
+        message:
+          type: string
+        requestId:
+          type: string
+        details:
+          type: array
+          items:
+            type: string

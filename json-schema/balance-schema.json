@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/bank-of-new-york-mellon/json-schema/balance-schema.json",
+  "title": "Balance",
+  "type": "object",
+  "description": "Account balance record",
+  "properties": {
+    "accountId": {
+      "type": "string"
+    },
+    "balanceType": {
+      "type": "string",
+      "description": "Balance type (current, available, intraday)"
+    },
+    "amount": {
+      "type": "number",
+      "format": "double"
+    },
+    "currency": {
+      "type": "string"
+    },
+    "asOfDateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "openingBalance": {
+      "type": "number",
+      "format": "double"
+    },
+    "closingBalance": {
+      "type": "number",
+      "format": "double"
+    }
+  }
+}

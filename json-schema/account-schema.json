@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/bank-of-new-york-mellon/json-schema/account-schema.json",
+  "title": "Account",
+  "type": "object",
+  "description": "A BNY Mellon treasury account",
+  "properties": {
+    "accountId": {
+      "type": "string",
+      "description": "Unique account identifier"
+    },
+    "accountNumber": {
+      "type": "string",
+      "description": "Account number (masked)"
+    },
+    "accountName": {
+      "type": "string",
+      "description": "Account name"
+    },
+    "accountType": {
+      "type": "string",
+      "description": "Account type"
+    },
+    "currency": {
+      "type": "string",
+      "description": "Account currency (ISO 4217)"
+    },
+    "status": {
+      "type": "string",
+      "description": "Account status",
+      "enum": [
+        "active",
+        "inactive",
+        "closed"
+      ]
+    },
+    "bankCode": {
+      "type": "string",
+      "description": "BNY Mellon bank code"
+    }
+  }
+}
