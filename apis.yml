@@ -61,7 +61,7 @@ common:
     url: vocabulary/bny-mellon-vocabulary.yaml
   - type: NaftikoCapability
     url: capabilities/treasury-operations.yaml
-  - type: JSON-LD
+  - type: JSONLD
     url: json-ld/bny-mellon-context.jsonld
   - name: Features
     type: Features
