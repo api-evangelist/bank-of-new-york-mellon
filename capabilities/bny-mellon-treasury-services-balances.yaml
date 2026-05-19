@@ -1,0 +1,86 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: BNY Mellon Treasury Services API — Balances
+  description: 'BNY Mellon Treasury Services API — Balances. 1 operations. Lead operation: Get Account Balances. Self-contained
+    Naftiko capability covering one Bank Of New York Mellon business surface.'
+  tags:
+  - Bank Of New York Mellon
+  - Balances
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    BANK_OF_NEW_YORK_MELLON_API_KEY: BANK_OF_NEW_YORK_MELLON_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: bny-mellon-treasury-services-balances
+    baseUri: https://api.bnymellon.com/treasury/v4
+    description: BNY Mellon Treasury Services API — Balances business capability. Self-contained, no shared references.
+    resources:
+    - name: accounts-accountId-balances
+      path: /accounts/{accountId}/balances
+      operations:
+      - name: getaccountbalances
+        method: GET
+        description: Get Account Balances
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: accountId
+          in: path
+          type: string
+          description: Account identifier
+          required: true
+        - name: balanceType
+          in: query
+          type: string
+          description: Balance type filter (current, available, intraday)
+    authentication:
+      type: bearer
+      token: '{{env.BANK_OF_NEW_YORK_MELLON_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: bny-mellon-treasury-services-balances-rest
+    port: 8080
+    description: REST adapter for BNY Mellon Treasury Services API — Balances. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/accounts/{accountid}/balances
+      name: accounts-accountid-balances
+      description: REST surface for accounts-accountId-balances.
+      operations:
+      - method: GET
+        name: getaccountbalances
+        description: Get Account Balances
+        call: bny-mellon-treasury-services-balances.getaccountbalances
+        with:
+          accountId: rest.accountId
+          balanceType: rest.balanceType
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: bny-mellon-treasury-services-balances-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for BNY Mellon Treasury Services API — Balances. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: get-account-balances
+      description: Get Account Balances
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: bny-mellon-treasury-services-balances.getaccountbalances
+      with:
+        accountId: tools.accountId
+        balanceType: tools.balanceType
+      outputParameters:
+      - type: object
+        mapping: $.

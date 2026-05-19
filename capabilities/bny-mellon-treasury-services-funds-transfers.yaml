@@ -1,0 +1,122 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: BNY Mellon Treasury Services API — Funds Transfers
+  description: 'BNY Mellon Treasury Services API — Funds Transfers. 2 operations. Lead operation: Initiate Funds Transfer.
+    Self-contained Naftiko capability covering one Bank Of New York Mellon business surface.'
+  tags:
+  - Bank Of New York Mellon
+  - Funds Transfers
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    BANK_OF_NEW_YORK_MELLON_API_KEY: BANK_OF_NEW_YORK_MELLON_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: bny-mellon-treasury-services-funds-transfers
+    baseUri: https://api.bnymellon.com/treasury/v4
+    description: BNY Mellon Treasury Services API — Funds Transfers business capability. Self-contained, no shared references.
+    resources:
+    - name: funds-transfers
+      path: /funds-transfers
+      operations:
+      - name: initiatefundstransfer
+        method: POST
+        description: Initiate Funds Transfer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: funds-transfers-transferId
+      path: /funds-transfers/{transferId}
+      operations:
+      - name: getfundstransfer
+        method: GET
+        description: Get Funds Transfer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: transferId
+          in: path
+          type: string
+          description: Funds transfer identifier
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.BANK_OF_NEW_YORK_MELLON_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: bny-mellon-treasury-services-funds-transfers-rest
+    port: 8080
+    description: REST adapter for BNY Mellon Treasury Services API — Funds Transfers. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/funds-transfers
+      name: funds-transfers
+      description: REST surface for funds-transfers.
+      operations:
+      - method: POST
+        name: initiatefundstransfer
+        description: Initiate Funds Transfer
+        call: bny-mellon-treasury-services-funds-transfers.initiatefundstransfer
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/funds-transfers/{transferid}
+      name: funds-transfers-transferid
+      description: REST surface for funds-transfers-transferId.
+      operations:
+      - method: GET
+        name: getfundstransfer
+        description: Get Funds Transfer
+        call: bny-mellon-treasury-services-funds-transfers.getfundstransfer
+        with:
+          transferId: rest.transferId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: bny-mellon-treasury-services-funds-transfers-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for BNY Mellon Treasury Services API — Funds Transfers. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: initiate-funds-transfer
+      description: Initiate Funds Transfer
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: bny-mellon-treasury-services-funds-transfers.initiatefundstransfer
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-funds-transfer
+      description: Get Funds Transfer
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: bny-mellon-treasury-services-funds-transfers.getfundstransfer
+      with:
+        transferId: tools.transferId
+      outputParameters:
+      - type: object
+        mapping: $.
