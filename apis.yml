@@ -42,6 +42,10 @@ apis:
       (wire, ACH, SWIFT, CHIPS), access account balances and transaction history, and manage funds transfers. The API is
       available via the BNY Mellon Marketplace and supports global treasury operations across multiple currencies.
 common:
+  - type: OAuthScopes
+    url: scopes/bank-of-new-york-mellon-scopes.yml
+  - url: https://www.bny.com/corporate/global/en/insights.html
+    type: Blog
   - type: GitHubOrganization
     url: https://github.com/BNYMellon
   - type: LinkedIn

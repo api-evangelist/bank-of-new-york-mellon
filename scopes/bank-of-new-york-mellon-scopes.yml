@@ -1,0 +1,40 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/bny-mellon-treasury-services-api-openapi.yml
+schemes:
+- name: OAuth2
+  source: openapi/bny-mellon-treasury-services-api-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://api.bnymellon.com/oauth/token
+scopes:
+- scope: accounts:read
+  description: Read account data
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/bny-mellon-treasury-services-api-openapi.yml
+- scope: balances:read
+  description: Read balance data
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/bny-mellon-treasury-services-api-openapi.yml
+- scope: payments:write
+  description: Initiate and manage payments
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/bny-mellon-treasury-services-api-openapi.yml
+- scope: transactions:read
+  description: Read transaction history
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/bny-mellon-treasury-services-api-openapi.yml
+- scope: transfers:write
+  description: Initiate funds transfers
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/bny-mellon-treasury-services-api-openapi.yml
