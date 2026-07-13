@@ -1,0 +1,14 @@
+{
+  "repo": "bank-of-new-york-mellon",
+  "feeds": [
+    {
+      "source": "https://www.bny.com/corporate/global/en/insights.html",
+      "feed_url": "https://www.bny.com/corporate/global/en/insights.html",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "fetched": "2026-07-11T11:50:51Z",
+  "post_count": 5
+}
