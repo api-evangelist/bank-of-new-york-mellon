@@ -1,0 +1,122 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/bny-mellon-treasury-services-api-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 9
+  by_action_class:
+    connected: 7
+    acting: 2
+  by_consequence:
+    read: 7
+    physical: 2
+  human_in_the_loop_required: 0
+operations:
+- path: /accounts
+  method: get
+  operationId: listAccounts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /accounts/{accountId}
+  method: get
+  operationId: getAccount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /accounts/{accountId}/balances
+  method: get
+  operationId: getAccountBalances
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /accounts/{accountId}/transactions
+  method: get
+  operationId: listTransactions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /payments
+  method: post
+  operationId: initiatePayment
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /payments
+  method: get
+  operationId: listPayments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /payments/{paymentId}
+  method: get
+  operationId: getPayment
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /funds-transfers
+  method: post
+  operationId: initiateFundsTransfer
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /funds-transfers/{transferId}
+  method: get
+  operationId: getFundsTransfer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none

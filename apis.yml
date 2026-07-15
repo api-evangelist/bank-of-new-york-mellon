@@ -42,6 +42,8 @@ apis:
       (wire, ACH, SWIFT, CHIPS), access account balances and transaction history, and manage funds transfers. The API is
       available via the BNY Mellon Marketplace and supports global treasury operations across multiple currencies.
 common:
+  - type: AgenticAccess
+    url: agentic-access/bank-of-new-york-mellon-agentic-access.yml
   - type: DomainSecurity
     url: security/bank-of-new-york-mellon-domain-security.yml
   - type: Authentication
