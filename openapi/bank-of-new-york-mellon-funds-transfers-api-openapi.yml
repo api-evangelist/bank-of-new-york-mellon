@@ -1,0 +1,165 @@
+openapi: 3.0.3
+info:
+  title: BNY Mellon Treasury Services Accounts Funds Transfers API
+  description: The BNY Mellon Treasury Services API enables corporate clients to programmatically initiate and track payments, access account balances and transaction history, manage wire transfers, and retrieve reporting data. The API is available via the BNY Mellon Marketplace (marketplace.bnymellon.com) and supports global treasury operations across multiple currencies and payment rails.
+  version: 4.0.0
+  contact:
+    url: https://marketplace.bnymellon.com/treasury/api-central/
+servers:
+- url: https://api.bnymellon.com/treasury/v4
+  description: BNY Mellon Treasury Services API Production
+- url: https://apiuat.bnymellon.com/treasury/v4
+  description: BNY Mellon Treasury Services API UAT/Sandbox
+security:
+- OAuth2: []
+tags:
+- name: Funds Transfers
+paths:
+  /funds-transfers:
+    post:
+      operationId: initiateFundsTransfer
+      summary: Initiate Funds Transfer
+      description: Initiate a domestic or international funds transfer between accounts.
+      tags:
+      - Funds Transfers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FundsTransferRequest'
+      responses:
+        '201':
+          description: Funds transfer initiated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FundsTransferResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /funds-transfers/{transferId}:
+    get:
+      operationId: getFundsTransfer
+      summary: Get Funds Transfer
+      description: Retrieve status and details of a specific funds transfer.
+      tags:
+      - Funds Transfers
+      parameters:
+      - name: transferId
+        in: path
+        required: true
+        description: Funds transfer identifier
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Funds transfer details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FundsTransferResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Transfer not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    FundsTransferRequest:
+      type: object
+      description: Funds transfer request between accounts
+      required:
+      - amount
+      - currency
+      - debitAccountId
+      - creditAccountId
+      properties:
+        amount:
+          type: number
+          format: double
+        currency:
+          type: string
+        debitAccountId:
+          type: string
+        creditAccountId:
+          type: string
+        valueDate:
+          type: string
+          format: date
+        memo:
+          type: string
+        clientReference:
+          type: string
+    FundsTransferResponse:
+      type: object
+      description: Funds transfer response
+      properties:
+        transferId:
+          type: string
+        clientReference:
+          type: string
+        status:
+          type: string
+          enum:
+          - pending
+          - processing
+          - completed
+          - rejected
+        amount:
+          type: number
+          format: double
+        currency:
+          type: string
+        debitAccountId:
+          type: string
+        creditAccountId:
+          type: string
+        valueDate:
+          type: string
+          format: date
+        createdAt:
+          type: string
+          format: date-time
+    ErrorResponse:
+      type: object
+      description: API error response
+      properties:
+        errorCode:
+          type: string
+        message:
+          type: string
+        requestId:
+          type: string
+        details:
+          type: array
+          items:
+            type: string
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.bnymellon.com/oauth/token
+          scopes:
+            accounts:read: Read account data
+            balances:read: Read balance data
+            transactions:read: Read transaction history
+            payments:write: Initiate and manage payments
+            transfers:write: Initiate funds transfers

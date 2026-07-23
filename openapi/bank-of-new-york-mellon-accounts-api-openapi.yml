@@ -1,0 +1,148 @@
+openapi: 3.0.3
+info:
+  title: BNY Mellon Treasury Services Accounts API
+  description: The BNY Mellon Treasury Services API enables corporate clients to programmatically initiate and track payments, access account balances and transaction history, manage wire transfers, and retrieve reporting data. The API is available via the BNY Mellon Marketplace (marketplace.bnymellon.com) and supports global treasury operations across multiple currencies and payment rails.
+  version: 4.0.0
+  contact:
+    url: https://marketplace.bnymellon.com/treasury/api-central/
+servers:
+- url: https://api.bnymellon.com/treasury/v4
+  description: BNY Mellon Treasury Services API Production
+- url: https://apiuat.bnymellon.com/treasury/v4
+  description: BNY Mellon Treasury Services API UAT/Sandbox
+security:
+- OAuth2: []
+tags:
+- name: Accounts
+paths:
+  /accounts:
+    get:
+      operationId: listAccounts
+      summary: List Accounts
+      description: Retrieve a list of accounts accessible to the authenticated client.
+      tags:
+      - Accounts
+      parameters:
+      - name: currency
+        in: query
+        description: Filter accounts by currency (ISO 4217)
+        schema:
+          type: string
+      - name: accountType
+        in: query
+        description: Filter by account type
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Account list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountListResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /accounts/{accountId}:
+    get:
+      operationId: getAccount
+      summary: Get Account
+      description: Retrieve details for a specific account.
+      tags:
+      - Accounts
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        description: Account identifier
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Account details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Account not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    Account:
+      type: object
+      description: A BNY Mellon treasury account
+      properties:
+        accountId:
+          type: string
+          description: Unique account identifier
+        accountNumber:
+          type: string
+          description: Account number (masked)
+        accountName:
+          type: string
+          description: Account name
+        accountType:
+          type: string
+          description: Account type
+        currency:
+          type: string
+          description: Account currency (ISO 4217)
+        status:
+          type: string
+          description: Account status
+          enum:
+          - active
+          - inactive
+          - closed
+        bankCode:
+          type: string
+          description: BNY Mellon bank code
+    AccountListResponse:
+      type: object
+      description: List of accounts
+      properties:
+        accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
+        totalCount:
+          type: integer
+    ErrorResponse:
+      type: object
+      description: API error response
+      properties:
+        errorCode:
+          type: string
+        message:
+          type: string
+        requestId:
+          type: string
+        details:
+          type: array
+          items:
+            type: string
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.bnymellon.com/oauth/token
+          scopes:
+            accounts:read: Read account data
+            balances:read: Read balance data
+            transactions:read: Read transaction history
+            payments:write: Initiate and manage payments
+            transfers:write: Initiate funds transfers

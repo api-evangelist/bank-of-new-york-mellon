@@ -1,0 +1,132 @@
+openapi: 3.0.3
+info:
+  title: BNY Mellon Treasury Services Accounts Transactions API
+  description: The BNY Mellon Treasury Services API enables corporate clients to programmatically initiate and track payments, access account balances and transaction history, manage wire transfers, and retrieve reporting data. The API is available via the BNY Mellon Marketplace (marketplace.bnymellon.com) and supports global treasury operations across multiple currencies and payment rails.
+  version: 4.0.0
+  contact:
+    url: https://marketplace.bnymellon.com/treasury/api-central/
+servers:
+- url: https://api.bnymellon.com/treasury/v4
+  description: BNY Mellon Treasury Services API Production
+- url: https://apiuat.bnymellon.com/treasury/v4
+  description: BNY Mellon Treasury Services API UAT/Sandbox
+security:
+- OAuth2: []
+tags:
+- name: Transactions
+paths:
+  /accounts/{accountId}/transactions:
+    get:
+      operationId: listTransactions
+      summary: List Transactions
+      description: Retrieve transaction history for a specific account.
+      tags:
+      - Transactions
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        description: Account identifier
+        schema:
+          type: string
+      - name: fromDate
+        in: query
+        description: Start date (ISO 8601)
+        schema:
+          type: string
+          format: date
+      - name: toDate
+        in: query
+        description: End date (ISO 8601)
+        schema:
+          type: string
+          format: date
+      - name: limit
+        in: query
+        description: Page size
+        schema:
+          type: integer
+          default: 100
+      responses:
+        '200':
+          description: Transaction list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionListResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    Transaction:
+      type: object
+      description: A transaction on a BNY Mellon account
+      properties:
+        transactionId:
+          type: string
+        accountId:
+          type: string
+        amount:
+          type: number
+          format: double
+        currency:
+          type: string
+        debitCredit:
+          type: string
+          enum:
+          - debit
+          - credit
+        description:
+          type: string
+        referenceNumber:
+          type: string
+        valueDate:
+          type: string
+          format: date
+        bookingDate:
+          type: string
+          format: date
+        status:
+          type: string
+    TransactionListResponse:
+      type: object
+      description: Paginated transaction list
+      properties:
+        transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transaction'
+        totalCount:
+          type: integer
+        pageSize:
+          type: integer
+    ErrorResponse:
+      type: object
+      description: API error response
+      properties:
+        errorCode:
+          type: string
+        message:
+          type: string
+        requestId:
+          type: string
+        details:
+          type: array
+          items:
+            type: string
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.bnymellon.com/oauth/token
+          scopes:
+            accounts:read: Read account data
+            balances:read: Read balance data
+            transactions:read: Read transaction history
+            payments:write: Initiate and manage payments
+            transfers:write: Initiate funds transfers

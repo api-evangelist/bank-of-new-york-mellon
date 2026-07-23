@@ -1,0 +1,230 @@
+openapi: 3.0.3
+info:
+  title: BNY Mellon Treasury Services Accounts Payments API
+  description: The BNY Mellon Treasury Services API enables corporate clients to programmatically initiate and track payments, access account balances and transaction history, manage wire transfers, and retrieve reporting data. The API is available via the BNY Mellon Marketplace (marketplace.bnymellon.com) and supports global treasury operations across multiple currencies and payment rails.
+  version: 4.0.0
+  contact:
+    url: https://marketplace.bnymellon.com/treasury/api-central/
+servers:
+- url: https://api.bnymellon.com/treasury/v4
+  description: BNY Mellon Treasury Services API Production
+- url: https://apiuat.bnymellon.com/treasury/v4
+  description: BNY Mellon Treasury Services API UAT/Sandbox
+security:
+- OAuth2: []
+tags:
+- name: Payments
+paths:
+  /payments:
+    post:
+      operationId: initiatePayment
+      summary: Initiate Payment
+      description: Initiate a payment including wire transfers, ACH, SWIFT, and international payments.
+      tags:
+      - Payments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentRequest'
+      responses:
+        '201':
+          description: Payment initiated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    get:
+      operationId: listPayments
+      summary: List Payments
+      description: Retrieve a list of payments with optional status and date filters.
+      tags:
+      - Payments
+      parameters:
+      - name: status
+        in: query
+        description: Payment status filter
+        schema:
+          type: string
+          enum:
+          - pending
+          - processing
+          - completed
+          - rejected
+          - returned
+      - name: fromDate
+        in: query
+        description: Start date filter
+        schema:
+          type: string
+          format: date
+      - name: toDate
+        in: query
+        description: End date filter
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: Payment list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentListResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /payments/{paymentId}:
+    get:
+      operationId: getPayment
+      summary: Get Payment
+      description: Retrieve the status and details of a specific payment.
+      tags:
+      - Payments
+      parameters:
+      - name: paymentId
+        in: path
+        required: true
+        description: Payment identifier
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Payment details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Payment not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    PaymentListResponse:
+      type: object
+      description: List of payments
+      properties:
+        payments:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentResponse'
+        totalCount:
+          type: integer
+    PaymentRequest:
+      type: object
+      description: Payment initiation request
+      required:
+      - paymentType
+      - amount
+      - currency
+      - debitAccountId
+      - creditorName
+      - creditorAccountNumber
+      properties:
+        paymentType:
+          type: string
+          description: Payment type (WIRE, ACH_CREDIT, ACH_DEBIT, SWIFT, CHIPS)
+        amount:
+          type: number
+          format: double
+        currency:
+          type: string
+        debitAccountId:
+          type: string
+        valueDate:
+          type: string
+          format: date
+        creditorName:
+          type: string
+        creditorAccountNumber:
+          type: string
+        creditorBankCode:
+          type: string
+        creditorSwiftCode:
+          type: string
+        remittanceInfo:
+          type: string
+        clientReference:
+          type: string
+    PaymentResponse:
+      type: object
+      description: Payment response
+      properties:
+        paymentId:
+          type: string
+        clientReference:
+          type: string
+        status:
+          type: string
+          enum:
+          - pending
+          - processing
+          - completed
+          - rejected
+          - returned
+        paymentType:
+          type: string
+        amount:
+          type: number
+          format: double
+        currency:
+          type: string
+        valueDate:
+          type: string
+          format: date
+        createdAt:
+          type: string
+          format: date-time
+        statusMessage:
+          type: string
+    ErrorResponse:
+      type: object
+      description: API error response
+      properties:
+        errorCode:
+          type: string
+        message:
+          type: string
+        requestId:
+          type: string
+        details:
+          type: array
+          items:
+            type: string
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.bnymellon.com/oauth/token
+          scopes:
+            accounts:read: Read account data
+            balances:read: Read balance data
+            transactions:read: Read transaction history
+            payments:write: Initiate and manage payments
+            transfers:write: Initiate funds transfers
