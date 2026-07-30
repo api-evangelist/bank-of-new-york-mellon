@@ -1,4 +1,18 @@
 aid: bank-of-new-york-mellon
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/bank-of-new-york-mellon.png
 url: https://raw.githubusercontent.com/api-evangelist/bank-of-new-york-mellon/refs/heads/main/apis.yml
 name: BNY Mellon
 tags:
@@ -16,31 +30,76 @@ description: >-
   (marketplace.bnymellon.com) and developer portal (developer.bny.com) provide Treasury Services APIs for corporate
   clients to automate payments, account management, balance reporting, and funds transfers.
 apis:
-  - aid: bank-of-new-york-mellon:treasury-services-api
-    name: BNY Mellon Treasury Services API
-    tags:
-      - Accounts
-      - Balances
-      - Funds Transfers
-      - Institutional Banking
-      - Payments
-      - Treasury
-      - Wire Transfers
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://api.bnymellon.com/treasury/v4
-    humanURL: https://marketplace.bnymellon.com/treasury/api-central/
-    properties:
-      - url: https://marketplace.bnymellon.com/treasury/api-central/
-        type: Documentation
-      - url: https://developer.bny.com/app/
-        type: Documentation
-        name: BNY Developer Marketplace
-      - url: openapi/bny-mellon-treasury-services-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      The BNY Mellon Treasury Services API enables institutional clients to programmatically initiate and track payments
-      (wire, ACH, SWIFT, CHIPS), access account balances and transaction history, and manage funds transfers. The API is
-      available via the BNY Mellon Marketplace and supports global treasury operations across multiple currencies.
+- aid: bank-of-new-york-mellon:bank-of-new-york-mellon-accounts-api
+  name: BNY Mellon Accounts API
+  description: The Accounts API from BNY Mellon — 2 operation(s) for accounts.
+  humanURL: https://marketplace.bnymellon.com/treasury/api-central/
+  baseURL: https://api.bnymellon.com/treasury/v4
+  tags:
+  - Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/bank-of-new-york-mellon-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://marketplace.bnymellon.com/treasury/api-central/
+  - type: Documentation
+    url: https://developer.bny.com/app/
+- aid: bank-of-new-york-mellon:bank-of-new-york-mellon-balances-api
+  name: BNY Mellon Balances API
+  description: The Balances API from BNY Mellon — 1 operation(s) for balances.
+  humanURL: https://marketplace.bnymellon.com/treasury/api-central/
+  baseURL: https://api.bnymellon.com/treasury/v4
+  tags:
+  - Balances
+  properties:
+  - type: OpenAPI
+    url: openapi/bank-of-new-york-mellon-balances-api-openapi.yml
+  - type: Documentation
+    url: https://marketplace.bnymellon.com/treasury/api-central/
+  - type: Documentation
+    url: https://developer.bny.com/app/
+- aid: bank-of-new-york-mellon:bank-of-new-york-mellon-funds-transfers-api
+  name: BNY Mellon Funds Transfers API
+  description: The Funds Transfers API from BNY Mellon — 2 operation(s) for funds transfers.
+  humanURL: https://marketplace.bnymellon.com/treasury/api-central/
+  baseURL: https://api.bnymellon.com/treasury/v4
+  tags:
+  - Funds Transfers
+  properties:
+  - type: OpenAPI
+    url: openapi/bank-of-new-york-mellon-funds-transfers-api-openapi.yml
+  - type: Documentation
+    url: https://marketplace.bnymellon.com/treasury/api-central/
+  - type: Documentation
+    url: https://developer.bny.com/app/
+- aid: bank-of-new-york-mellon:bank-of-new-york-mellon-payments-api
+  name: BNY Mellon Payments API
+  description: The Payments API from BNY Mellon — 2 operation(s) for payments.
+  humanURL: https://marketplace.bnymellon.com/treasury/api-central/
+  baseURL: https://api.bnymellon.com/treasury/v4
+  tags:
+  - Payments
+  properties:
+  - type: OpenAPI
+    url: openapi/bank-of-new-york-mellon-payments-api-openapi.yml
+  - type: Documentation
+    url: https://marketplace.bnymellon.com/treasury/api-central/
+  - type: Documentation
+    url: https://developer.bny.com/app/
+- aid: bank-of-new-york-mellon:bank-of-new-york-mellon-transactions-api
+  name: BNY Mellon Transactions API
+  description: The Transactions API from BNY Mellon — 1 operation(s) for transactions.
+  humanURL: https://marketplace.bnymellon.com/treasury/api-central/
+  baseURL: https://api.bnymellon.com/treasury/v4
+  tags:
+  - Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/bank-of-new-york-mellon-transactions-api-openapi.yml
+  - type: Documentation
+    url: https://marketplace.bnymellon.com/treasury/api-central/
+  - type: Documentation
+    url: https://developer.bny.com/app/
 common:
   - type: AgenticAccess
     url: agentic-access/bank-of-new-york-mellon-agentic-access.yml
