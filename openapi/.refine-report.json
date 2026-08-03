@@ -1,0 +1,22 @@
+{
+  "provider": "bank-of-new-york-mellon",
+  "sources": [
+    "bank-of-new-york-mellon-accounts-api-openapi.yml",
+    "bank-of-new-york-mellon-balances-api-openapi.yml",
+    "bank-of-new-york-mellon-funds-transfers-api-openapi.yml",
+    "bank-of-new-york-mellon-payments-api-openapi.yml",
+    "bank-of-new-york-mellon-transactions-api-openapi.yml"
+  ],
+  "outputs": [
+    "bank-of-new-york-mellon-accounts-api-openapi.yml",
+    "bank-of-new-york-mellon-balances-api-openapi.yml",
+    "bank-of-new-york-mellon-funds-transfers-api-openapi.yml",
+    "bank-of-new-york-mellon-payments-api-openapi.yml",
+    "bank-of-new-york-mellon-transactions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
