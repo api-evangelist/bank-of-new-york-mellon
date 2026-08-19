@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "BNY Mellon Treasury Services Accounts Balances API",
+    "version": "4.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://api.bnymellon.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Balances",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Account Balances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bnymellon.com/treasury/v4/accounts/:accountId/balances",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "Account identifier"
+              },
+              {
+                "name": "balanceType",
+                "value": "",
+                "type": "query",
+                "description": "Balance type filter (current, available, intraday)"
+              }
+            ]
+          },
+          "docs": "Retrieve current, available, and intraday balances for an account."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
