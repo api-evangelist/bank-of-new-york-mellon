@@ -36,6 +36,8 @@ apis:
   humanURL: https://marketplace.bnymellon.com/treasury/api-central/
   baseURL: https://api.bnymellon.com/treasury/v4
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
@@ -92,6 +94,8 @@ apis:
   humanURL: https://marketplace.bnymellon.com/treasury/api-central/
   baseURL: https://api.bnymellon.com/treasury/v4
   tags:
+  - Transaction
+  tags_raw:
   - Transactions
   properties:
   - type: OpenAPI
