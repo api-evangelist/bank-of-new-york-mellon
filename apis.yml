@@ -116,6 +116,9 @@ apis:
   - type: Documentation
     url: https://developer.bny.com/app/
 common:
+  - type: CapabilityMap
+    url: capabilities/bank-of-new-york-mellon-capability-edges.yml
+    name: BNY Mellon Business Capability Map
   - type: AgenticAccess
     url: agentic-access/bank-of-new-york-mellon-agentic-access.yml
   - type: DomainSecurity
