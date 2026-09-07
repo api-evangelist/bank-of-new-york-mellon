@@ -17,6 +17,13 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "bank-of-new-york-mellon-accounts-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "bank-of-new-york-mellon-balances-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "bank-of-new-york-mellon-funds-transfers-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "bank-of-new-york-mellon-payments-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "bank-of-new-york-mellon-transactions-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }

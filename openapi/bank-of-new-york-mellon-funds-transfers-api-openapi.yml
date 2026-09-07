@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: BNY Mellon Treasury Services Accounts Funds Transfers API
   description: The BNY Mellon Treasury Services API enables corporate clients to programmatically initiate and track payments, access account balances and transaction history, manage wire transfers, and retrieve reporting data. The API is available via the BNY Mellon Marketplace (marketplace.bnymellon.com) and supports global treasury operations across multiple currencies and payment rails.
@@ -82,31 +82,20 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    FundsTransferRequest:
+    ErrorResponse:
       type: object
-      description: Funds transfer request between accounts
-      required:
-      - amount
-      - currency
-      - debitAccountId
-      - creditAccountId
+      description: API error response
       properties:
-        amount:
-          type: number
-          format: double
-        currency:
+        errorCode:
           type: string
-        debitAccountId:
+        message:
           type: string
-        creditAccountId:
+        requestId:
           type: string
-        valueDate:
-          type: string
-          format: date
-        memo:
-          type: string
-        clientReference:
-          type: string
+        details:
+          type: array
+          items:
+            type: string
     FundsTransferResponse:
       type: object
       description: Funds transfer response
@@ -137,20 +126,31 @@ components:
         createdAt:
           type: string
           format: date-time
-    ErrorResponse:
+    FundsTransferRequest:
       type: object
-      description: API error response
+      description: Funds transfer request between accounts
+      required:
+      - amount
+      - currency
+      - debitAccountId
+      - creditAccountId
       properties:
-        errorCode:
+        amount:
+          type: number
+          format: double
+        currency:
           type: string
-        message:
+        debitAccountId:
           type: string
-        requestId:
+        creditAccountId:
           type: string
-        details:
-          type: array
-          items:
-            type: string
+        valueDate:
+          type: string
+          format: date
+        memo:
+          type: string
+        clientReference:
+          type: string
   securitySchemes:
     OAuth2:
       type: oauth2

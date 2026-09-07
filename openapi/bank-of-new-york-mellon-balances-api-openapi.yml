@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: BNY Mellon Treasury Services Accounts Balances API
   description: The BNY Mellon Treasury Services API enables corporate clients to programmatically initiate and track payments, access account balances and transaction history, manage wire transfers, and retrieve reporting data. The API is available via the BNY Mellon Marketplace (marketplace.bnymellon.com) and supports global treasury operations across multiple currencies and payment rails.
@@ -72,16 +72,6 @@ components:
         closingBalance:
           type: number
           format: double
-    BalanceResponse:
-      type: object
-      description: Account balances response
-      properties:
-        accountId:
-          type: string
-        balances:
-          type: array
-          items:
-            $ref: '#/components/schemas/Balance'
     ErrorResponse:
       type: object
       description: API error response
@@ -96,6 +86,16 @@ components:
           type: array
           items:
             type: string
+    BalanceResponse:
+      type: object
+      description: Account balances response
+      properties:
+        accountId:
+          type: string
+        balances:
+          type: array
+          items:
+            $ref: '#/components/schemas/Balance'
   securitySchemes:
     OAuth2:
       type: oauth2
