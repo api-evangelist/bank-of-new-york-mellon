@@ -1,7 +1,9 @@
 ---
 title: BNY embraces role on small lenders' AI journey
 url: https://www.bankingdive.com/news/bny-ai-community-banks-initiative-razzaque/811224/
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Bank of New York Mellon Corp." press release artificial intelligence'
 position: 1
 source: serpapi-google

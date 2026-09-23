@@ -81,20 +81,16 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    ErrorResponse:
+    AccountListResponse:
       type: object
-      description: API error response
+      description: List of accounts
       properties:
-        errorCode:
-          type: string
-        message:
-          type: string
-        requestId:
-          type: string
-        details:
+        accounts:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/Account'
+        totalCount:
+          type: integer
     Account:
       type: object
       description: A BNY Mellon treasury account
@@ -124,16 +120,20 @@ components:
         bankCode:
           type: string
           description: BNY Mellon bank code
-    AccountListResponse:
+    ErrorResponse:
       type: object
-      description: List of accounts
+      description: API error response
       properties:
-        accounts:
+        errorCode:
+          type: string
+        message:
+          type: string
+        requestId:
+          type: string
+        details:
           type: array
           items:
-            $ref: '#/components/schemas/Account'
-        totalCount:
-          type: integer
+            type: string
   securitySchemes:
     OAuth2:
       type: oauth2

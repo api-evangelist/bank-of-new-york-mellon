@@ -1,7 +1,9 @@
 ---
 title: BNY Mellon is all-in on digital
 url: https://www.americanbanker.com/news/bny-mellon-is-all-in-on-digital
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Bank of New York Mellon Corp." press release artificial intelligence'
 position: 4
 source: serpapi-google

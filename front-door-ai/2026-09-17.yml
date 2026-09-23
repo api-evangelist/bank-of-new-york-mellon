@@ -1,0 +1,27 @@
+# Front Door AI Index — bank-of-new-york-mellon — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: bank-of-new-york-mellon
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.bnymellon.com
+  final_host: www.bny.com
+  ownership: inherited
+  owner: null
+  shares_host_with:
+  - bank-of-new-york
+  inherited_from: www.bny.com
+  verdict: scored
+  score: null
+  host_score: 6
+  density: null
+  words: 1183
+  tiers:
+    agentic: 1
+    core: 5
+    model: 0
+  ambiguous: 0
+  top_terms:
+    AI: 5
+    agentic: 1

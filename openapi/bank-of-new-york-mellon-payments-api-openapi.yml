@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: BNY Mellon Treasury Services Accounts Payments API
+  title: BNY Mellon Treasury Services Payments API
   description: The BNY Mellon Treasury Services API enables corporate clients to programmatically initiate and track payments, access account balances and transaction history, manage wire transfers, and retrieve reporting data. The API is available via the BNY Mellon Marketplace (marketplace.bnymellon.com) and supports global treasury operations across multiple currencies and payment rails.
   version: 4.0.0
   contact:
@@ -125,30 +125,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    PaymentListResponse:
-      type: object
-      description: List of payments
-      properties:
-        payments:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentResponse'
-        totalCount:
-          type: integer
-    ErrorResponse:
-      type: object
-      description: API error response
-      properties:
-        errorCode:
-          type: string
-        message:
-          type: string
-        requestId:
-          type: string
-        details:
-          type: array
-          items:
-            type: string
     PaymentRequest:
       type: object
       description: Payment initiation request
@@ -216,6 +192,30 @@ components:
           format: date-time
         statusMessage:
           type: string
+    PaymentListResponse:
+      type: object
+      description: List of payments
+      properties:
+        payments:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentResponse'
+        totalCount:
+          type: integer
+    ErrorResponse:
+      type: object
+      description: API error response
+      properties:
+        errorCode:
+          type: string
+        message:
+          type: string
+        requestId:
+          type: string
+        details:
+          type: array
+          items:
+            type: string
   securitySchemes:
     OAuth2:
       type: oauth2

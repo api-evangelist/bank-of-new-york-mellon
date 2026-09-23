@@ -1,11 +1,7 @@
 {
   "provider": "bank-of-new-york-mellon",
   "sources": [
-    "bank-of-new-york-mellon-accounts-api-openapi.yml",
-    "bank-of-new-york-mellon-balances-api-openapi.yml",
-    "bank-of-new-york-mellon-funds-transfers-api-openapi.yml",
-    "bank-of-new-york-mellon-payments-api-openapi.yml",
-    "bank-of-new-york-mellon-transactions-api-openapi.yml"
+    "_original/bny-mellon-treasury-services-api-openapi.yml"
   ],
   "outputs": [
     "bank-of-new-york-mellon-accounts-api-openapi.yml",
@@ -18,12 +14,20 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "bank-of-new-york-mellon-accounts-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "bank-of-new-york-mellon-balances-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "bank-of-new-york-mellon-funds-transfers-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "bank-of-new-york-mellon-payments-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "bank-of-new-york-mellon-transactions-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "bny-mellon-treasury-services-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "bny-mellon-treasury-services-api-openapi.yml: declared missing tag: Accounts",
+    "bny-mellon-treasury-services-api-openapi.yml: declared missing tag: Balances",
+    "bny-mellon-treasury-services-api-openapi.yml: declared missing tag: Funds Transfers",
+    "bny-mellon-treasury-services-api-openapi.yml: declared missing tag: Payments",
+    "bny-mellon-treasury-services-api-openapi.yml: declared missing tag: Transactions",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "bank-of-new-york-mellon-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bank-of-new-york-mellon-balances-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bank-of-new-york-mellon-funds-transfers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bank-of-new-york-mellon-payments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bank-of-new-york-mellon-transactions-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
