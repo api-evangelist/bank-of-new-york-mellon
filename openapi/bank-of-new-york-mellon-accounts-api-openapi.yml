@@ -81,16 +81,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    AccountListResponse:
-      type: object
-      description: List of accounts
-      properties:
-        accounts:
-          type: array
-          items:
-            $ref: '#/components/schemas/Account'
-        totalCount:
-          type: integer
     Account:
       type: object
       description: A BNY Mellon treasury account
@@ -134,6 +124,16 @@ components:
           type: array
           items:
             type: string
+    AccountListResponse:
+      type: object
+      description: List of accounts
+      properties:
+        accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
+        totalCount:
+          type: integer
   securitySchemes:
     OAuth2:
       type: oauth2

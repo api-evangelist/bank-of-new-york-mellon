@@ -62,18 +62,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    TransactionListResponse:
-      type: object
-      description: Paginated transaction list
-      properties:
-        transactions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Transaction'
-        totalCount:
-          type: integer
-        pageSize:
-          type: integer
     Transaction:
       type: object
       description: A transaction on a BNY Mellon account
@@ -118,6 +106,18 @@ components:
           type: array
           items:
             type: string
+    TransactionListResponse:
+      type: object
+      description: Paginated transaction list
+      properties:
+        transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transaction'
+        totalCount:
+          type: integer
+        pageSize:
+          type: integer
   securitySchemes:
     OAuth2:
       type: oauth2
