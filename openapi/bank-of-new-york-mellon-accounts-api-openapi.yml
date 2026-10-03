@@ -110,6 +110,16 @@ components:
         bankCode:
           type: string
           description: BNY Mellon bank code
+    AccountListResponse:
+      type: object
+      description: List of accounts
+      properties:
+        accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
+        totalCount:
+          type: integer
     ErrorResponse:
       type: object
       description: API error response
@@ -124,16 +134,6 @@ components:
           type: array
           items:
             type: string
-    AccountListResponse:
-      type: object
-      description: List of accounts
-      properties:
-        accounts:
-          type: array
-          items:
-            $ref: '#/components/schemas/Account'
-        totalCount:
-          type: integer
   securitySchemes:
     OAuth2:
       type: oauth2

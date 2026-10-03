@@ -125,30 +125,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      description: API error response
-      properties:
-        errorCode:
-          type: string
-        message:
-          type: string
-        requestId:
-          type: string
-        details:
-          type: array
-          items:
-            type: string
-    PaymentListResponse:
-      type: object
-      description: List of payments
-      properties:
-        payments:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentResponse'
-        totalCount:
-          type: integer
     PaymentRequest:
       type: object
       description: Payment initiation request
@@ -216,6 +192,30 @@ components:
           format: date-time
         statusMessage:
           type: string
+    PaymentListResponse:
+      type: object
+      description: List of payments
+      properties:
+        payments:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentResponse'
+        totalCount:
+          type: integer
+    ErrorResponse:
+      type: object
+      description: API error response
+      properties:
+        errorCode:
+          type: string
+        message:
+          type: string
+        requestId:
+          type: string
+        details:
+          type: array
+          items:
+            type: string
   securitySchemes:
     OAuth2:
       type: oauth2
