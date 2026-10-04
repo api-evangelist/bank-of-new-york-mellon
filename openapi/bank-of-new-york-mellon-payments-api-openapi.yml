@@ -125,6 +125,61 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    PaymentListResponse:
+      type: object
+      description: List of payments
+      properties:
+        payments:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentResponse'
+        totalCount:
+          type: integer
+    PaymentResponse:
+      type: object
+      description: Payment response
+      properties:
+        paymentId:
+          type: string
+        clientReference:
+          type: string
+        status:
+          type: string
+          enum:
+          - pending
+          - processing
+          - completed
+          - rejected
+          - returned
+        paymentType:
+          type: string
+        amount:
+          type: number
+          format: double
+        currency:
+          type: string
+        valueDate:
+          type: string
+          format: date
+        createdAt:
+          type: string
+          format: date-time
+        statusMessage:
+          type: string
+    ErrorResponse:
+      type: object
+      description: API error response
+      properties:
+        errorCode:
+          type: string
+        message:
+          type: string
+        requestId:
+          type: string
+        details:
+          type: array
+          items:
+            type: string
     PaymentRequest:
       type: object
       description: Payment initiation request
@@ -161,61 +216,6 @@ components:
           type: string
         clientReference:
           type: string
-    PaymentResponse:
-      type: object
-      description: Payment response
-      properties:
-        paymentId:
-          type: string
-        clientReference:
-          type: string
-        status:
-          type: string
-          enum:
-          - pending
-          - processing
-          - completed
-          - rejected
-          - returned
-        paymentType:
-          type: string
-        amount:
-          type: number
-          format: double
-        currency:
-          type: string
-        valueDate:
-          type: string
-          format: date
-        createdAt:
-          type: string
-          format: date-time
-        statusMessage:
-          type: string
-    PaymentListResponse:
-      type: object
-      description: List of payments
-      properties:
-        payments:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentResponse'
-        totalCount:
-          type: integer
-    ErrorResponse:
-      type: object
-      description: API error response
-      properties:
-        errorCode:
-          type: string
-        message:
-          type: string
-        requestId:
-          type: string
-        details:
-          type: array
-          items:
-            type: string
   securitySchemes:
     OAuth2:
       type: oauth2

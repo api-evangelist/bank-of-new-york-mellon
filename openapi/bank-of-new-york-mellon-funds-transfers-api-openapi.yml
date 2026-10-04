@@ -82,45 +82,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    FundsTransferRequest:
-      type: object
-      description: Funds transfer request between accounts
-      required:
-      - amount
-      - currency
-      - debitAccountId
-      - creditAccountId
-      properties:
-        amount:
-          type: number
-          format: double
-        currency:
-          type: string
-        debitAccountId:
-          type: string
-        creditAccountId:
-          type: string
-        valueDate:
-          type: string
-          format: date
-        memo:
-          type: string
-        clientReference:
-          type: string
-    ErrorResponse:
-      type: object
-      description: API error response
-      properties:
-        errorCode:
-          type: string
-        message:
-          type: string
-        requestId:
-          type: string
-        details:
-          type: array
-          items:
-            type: string
     FundsTransferResponse:
       type: object
       description: Funds transfer response
@@ -151,6 +112,45 @@ components:
         createdAt:
           type: string
           format: date-time
+    ErrorResponse:
+      type: object
+      description: API error response
+      properties:
+        errorCode:
+          type: string
+        message:
+          type: string
+        requestId:
+          type: string
+        details:
+          type: array
+          items:
+            type: string
+    FundsTransferRequest:
+      type: object
+      description: Funds transfer request between accounts
+      required:
+      - amount
+      - currency
+      - debitAccountId
+      - creditAccountId
+      properties:
+        amount:
+          type: number
+          format: double
+        currency:
+          type: string
+        debitAccountId:
+          type: string
+        creditAccountId:
+          type: string
+        valueDate:
+          type: string
+          format: date
+        memo:
+          type: string
+        clientReference:
+          type: string
   securitySchemes:
     OAuth2:
       type: oauth2
