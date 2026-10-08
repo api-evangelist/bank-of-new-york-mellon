@@ -117,6 +117,12 @@ apis:
   - type: Documentation
     url: https://developer.bny.com/app/
 common:
+  - type: Plans
+    url: plans/bank-of-new-york-mellon-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/bank-of-new-york-mellon-rate-limits.yml
+  - type: FinOps
+    url: finops/bank-of-new-york-mellon-finops.yml
   - type: CapabilityMap
     url: capabilities/bank-of-new-york-mellon-capability-edges.yml
     name: BNY Mellon Business Capability Map
