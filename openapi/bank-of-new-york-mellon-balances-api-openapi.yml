@@ -49,6 +49,20 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: API error response
+      properties:
+        errorCode:
+          type: string
+        message:
+          type: string
+        requestId:
+          type: string
+        details:
+          type: array
+          items:
+            type: string
     BalanceResponse:
       type: object
       description: Account balances response
@@ -82,20 +96,6 @@ components:
         closingBalance:
           type: number
           format: double
-    ErrorResponse:
-      type: object
-      description: API error response
-      properties:
-        errorCode:
-          type: string
-        message:
-          type: string
-        requestId:
-          type: string
-        details:
-          type: array
-          items:
-            type: string
   securitySchemes:
     OAuth2:
       type: oauth2

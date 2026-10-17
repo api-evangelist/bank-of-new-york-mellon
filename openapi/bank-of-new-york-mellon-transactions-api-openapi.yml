@@ -62,6 +62,20 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: API error response
+      properties:
+        errorCode:
+          type: string
+        message:
+          type: string
+        requestId:
+          type: string
+        details:
+          type: array
+          items:
+            type: string
     TransactionListResponse:
       type: object
       description: Paginated transaction list
@@ -104,20 +118,6 @@ components:
           format: date
         status:
           type: string
-    ErrorResponse:
-      type: object
-      description: API error response
-      properties:
-        errorCode:
-          type: string
-        message:
-          type: string
-        requestId:
-          type: string
-        details:
-          type: array
-          items:
-            type: string
   securitySchemes:
     OAuth2:
       type: oauth2

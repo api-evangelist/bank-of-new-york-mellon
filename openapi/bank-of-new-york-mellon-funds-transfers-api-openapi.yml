@@ -82,6 +82,20 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: API error response
+      properties:
+        errorCode:
+          type: string
+        message:
+          type: string
+        requestId:
+          type: string
+        details:
+          type: array
+          items:
+            type: string
     FundsTransferResponse:
       type: object
       description: Funds transfer response
@@ -112,20 +126,6 @@ components:
         createdAt:
           type: string
           format: date-time
-    ErrorResponse:
-      type: object
-      description: API error response
-      properties:
-        errorCode:
-          type: string
-        message:
-          type: string
-        requestId:
-          type: string
-        details:
-          type: array
-          items:
-            type: string
     FundsTransferRequest:
       type: object
       description: Funds transfer request between accounts

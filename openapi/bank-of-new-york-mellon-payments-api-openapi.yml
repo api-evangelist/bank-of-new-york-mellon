@@ -135,37 +135,6 @@ components:
             $ref: '#/components/schemas/PaymentResponse'
         totalCount:
           type: integer
-    PaymentResponse:
-      type: object
-      description: Payment response
-      properties:
-        paymentId:
-          type: string
-        clientReference:
-          type: string
-        status:
-          type: string
-          enum:
-          - pending
-          - processing
-          - completed
-          - rejected
-          - returned
-        paymentType:
-          type: string
-        amount:
-          type: number
-          format: double
-        currency:
-          type: string
-        valueDate:
-          type: string
-          format: date
-        createdAt:
-          type: string
-          format: date-time
-        statusMessage:
-          type: string
     ErrorResponse:
       type: object
       description: API error response
@@ -215,6 +184,37 @@ components:
         remittanceInfo:
           type: string
         clientReference:
+          type: string
+    PaymentResponse:
+      type: object
+      description: Payment response
+      properties:
+        paymentId:
+          type: string
+        clientReference:
+          type: string
+        status:
+          type: string
+          enum:
+          - pending
+          - processing
+          - completed
+          - rejected
+          - returned
+        paymentType:
+          type: string
+        amount:
+          type: number
+          format: double
+        currency:
+          type: string
+        valueDate:
+          type: string
+          format: date
+        createdAt:
+          type: string
+          format: date-time
+        statusMessage:
           type: string
   securitySchemes:
     OAuth2:
